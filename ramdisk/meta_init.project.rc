@@ -1,0 +1,88 @@
+on fs
+    write /proc/bootprof "start mobicore (on fs)"
+    mkdir /data/app/mcRegistry 0770 system system
+    mkdir /data/app/mcRegistry/TbStorage 0770 system system
+    chmod 0600 /dev/mobicore
+    chown system system /dev/mobicore
+    chmod 0666 /dev/mobicore-user
+    chown system system /dev/mobicore-user
+    #Mobicore daemon paths
+    export MC_AUTH_TOKEN_PATH /efs
+    start mobicore
+    write /proc/bootprof "start mobicore end (on fs)"
+
+on post-fs-data
+#
+# Connectivity related modules and character device nodes (Begin)
+#
+
+#/dev/ttyMT2 for Connectivity BT/FM/GPS usage
+    chmod 0660 /dev/ttyMT2
+    chown system system /dev/ttyMT2
+
+	insmod /system/lib/modules/mtk_wmt_detect.ko
+
+	# Create char device file for WMT, GPS, BT, FM, WIFI
+    mknod /dev/stpwmt c 190 0;
+    mknod /dev/stpgps c 191 0;
+    mknod /dev/stpbt  c 192 0;
+
+    chmod 0660 /dev/stpwmt
+    chown system system /dev/stpwmt
+ 
+    mknod /dev/wmtWifi c 153 0
+    chmod 0660 /dev/wmtWifi
+    chown system system /dev/wmtWifi
+
+# BT
+    chmod 0660 /dev/stpbt
+    chown bluetooth radio /dev/stpbt
+
+# GPS
+    chown gps gps /dev/stpgps
+    chown gps gps /sys/class/gpsdrv/gps/pwrctl
+    chown gps gps /sys/class/gpsdrv/gps/suspend
+    chown gps gps /sys/class/gpsdrv/gps/state
+    chown gps gps /sys/class/gpsdrv/gps/pwrsave
+    chown gps gps /sys/class/gpsdrv/gps/status
+    chmod 0660 /dev/stpgps
+
+# WiFi
+    mkdir /data/misc/wifi 0770 wifi wifi
+    mkdir /data/misc/wifi/sockets 0770 wifi wifi
+    mkdir /data/misc/wpa_supplicant 0770 wifi wifi
+    chown wifi wifi /data/misc/wifi
+
+# FM Radio device node
+    mknod /dev/fm     c 193 0;
+    chmod 0660 /dev/fm
+    chown system media /dev/fm
+
+#
+# Connectivity related device nodes & configuration (end)
+#
+
+
+on boot
+
+#
+# Connectivity related services (Begin)
+#
+service wmt_loader /system/bin/wmt_loader
+	user root
+	group root
+	oneshot
+
+service 66xx_launcher /system/bin/6620_launcher -m 4 -p /system/etc/firmware/
+    user system
+    group system
+
+#start daemon (Registry directories should already be present
+service mobicore /system/bin/mcDriverDaemon -r /system/app/mcRegistry/020f0000000000000000000000000000.drbin -r /system/app/mcRegistry/05120000000000000000000000000000.drbin -r /system/app/mcRegistry/070b0000000000000000000000000000.drbin
+    user system
+    group system
+    class core
+    oneshot
+#
+# Connectivity related services (End)
+#

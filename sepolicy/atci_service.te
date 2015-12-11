@@ -1,0 +1,50 @@
+# ==============================================
+# Policy File of /system/binatci_service Executable File 
+
+
+# ==============================================
+# Type Declaration
+# ==============================================
+
+type atci_service_exec , exec_type, file_type;
+type atci_service ,domain;
+
+# ==============================================
+# Android Policy Rule
+# ==============================================
+
+# ==============================================
+# NSA Policy Rule
+# ==============================================
+
+# ==============================================
+# MTK Policy Rule
+# ==============================================
+init_daemon_domain(atci_service)
+
+# Date : 2014/09/09 (or WK14.37)
+# Operation : Migration
+# Purpose : allow Binder IPC
+# atci_pq_cmd.cpp will call aal for runtime tuning
+binder_use(atci_service)
+binder_call(atci_service, aal)
+binder_service(atci_service)
+allow atci_service block_device:dir search;
+allow atci_service platformblk_device:dir search;
+allow atci_service platformblk_device:blk_file { open read write };
+allow atci_service system_data_file:dir write;
+allow atci_service system_data_file:dir add_name;
+allow atci_service system_data_file:sock_file create;
+allow atci_service system_data_file:sock_file setattr;
+allow atci_service self:capability chown;
+allow atci_service system_data_file:dir remove_name;
+allow atci_service system_data_file:sock_file unlink;
+allow atci_service system_server:unix_dgram_socket sendto;
+allow atci_service system_data_file:file rw_file_perms;
+allow atci_service system_data_file:sock_file write;
+allow atci_service misc2_device:chr_file { open read write };
+allow atci_service mt6605_device:chr_file { read write ioctl open getattr };
+allow atci_service nfc_socket:dir { write add_name remove_name search };
+allow atci_service nfc_socket:sock_file { create write unlink setattr };
+allow atci_service system_file:file execute_no_trans;
+

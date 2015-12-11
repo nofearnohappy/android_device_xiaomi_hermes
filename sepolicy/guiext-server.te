@@ -1,0 +1,37 @@
+# ==============================================
+# Policy File of /system/bin/guiext-server Executable File
+
+# ==============================================
+# Type Declaration
+# ==============================================
+type guiext-server, domain;
+type guiext-server_exec, exec_type, file_type;
+
+# ==============================================
+# MTK Policy Rule
+# ==============================================
+init_daemon_domain(guiext-server)
+
+# Date : WK14.37
+# Operation : Migration
+# Purpose : for bqdump and conversion pool
+binder_service(guiext-server)
+binder_use(guiext-server)
+binder_call(domain, guiext-server)
+
+# Date : WK14.37
+# Operation : Migration
+# Purpose : to allocate GraphicBuffer
+allow guiext-server surfaceflinger:binder call;
+allow guiext-server surfaceflinger:fd use;
+allow guiext-server gpu_device:chr_file { open read write ioctl };
+
+# Date : WK14.43
+# Operation : Migration
+# Purpose : to be a service
+allow guiext-server guiext-server_service:service_manager add;
+
+# Date : WK14.43
+# Operation : Migration
+# Purpose :
+allow guiext-server system_server:binder call;
