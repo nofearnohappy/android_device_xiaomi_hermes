@@ -19,8 +19,6 @@ LOCAL_PATH := device/xiaomi/hermes
 
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
-TARGET_NO_RECOVERY := true
-
 USE_CAMERA_STUB := true
 
 # inherit from the proprietary version
