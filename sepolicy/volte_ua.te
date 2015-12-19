@@ -20,3 +20,4 @@ allow volte_ua socket_device:sock_file write;
 allow volte_ua volte_stack:unix_stream_socket connectto;
 allow volte_ua node:udp_socket node_bind;
 allow volte_ua self:udp_socket { bind create };
+allow volte_ua self:udp_socket read;

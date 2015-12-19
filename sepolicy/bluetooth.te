@@ -12,6 +12,7 @@ allow bluetooth mediaserver:unix_dgram_socket sendto;
 allow bluetooth mtkbt:unix_dgram_socket sendto;
 allow bluetooth mtkbt:unix_stream_socket connectto;
 allow bluetooth mtkbt:fd use;
+allow bluetooth init:unix_dgram_socket sendto;
 
 # Data : WK14.36
 # Operation : Migration
@@ -25,3 +26,7 @@ allow bluetooth bt_data_file:file { open read write create setattr getattr appen
 binder_call(bluetooth, mtkbt)
 #============= mediaserver ==============
 allow mediaserver bt_data_file:file read;
+
+#============= bluetooth ==============
+allow bluetooth platform_app_tmpfs:file write;
+

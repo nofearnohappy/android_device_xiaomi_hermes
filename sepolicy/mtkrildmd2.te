@@ -81,7 +81,14 @@ allow mtkrildmd2 ctl_muxreport-daemon_prop:property_service set;
 allow mtkrildmd2 persist_service_atci_prop:property_service set;
 allow mtkrildmd2 block_device:dir search;
 allow mtkrildmd2 platformblk_device:dir search;
+allow mtkrildmd2 emd_device:chr_file { read write open };
+allow mtkrildmd2 emd_device:chr_file ioctl;
+allow mtkrildmd2 platform_app:fd use;
+allow mtkrildmd2 radio:fd use;
 
 # For emulator
 allow mtkrildmd2 qemu_pipe_device:chr_file { read write };
 allow mtkrildmd2 socket_device:sock_file write;
+
+allow mtkrildmd2 ttyACM_device:chr_file { read write ioctl open };
+allow mtkrildmd2 pppd_gprs_prop:property_service set;

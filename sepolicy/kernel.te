@@ -22,9 +22,3 @@ allow kernel loop_device:blk_file { read };
 # Operation : Migration
 # Purpose :  Access to TC1 partition for reading MAC
 allow kernel platformblk_device:blk_file { open read write };
-
-# Date : WK14.50
-# Operation : Migration
-# Purpose : Allow the mtk_mwtd access the config on sdcard for customer. 
-allow kernel fuse:file open;
-

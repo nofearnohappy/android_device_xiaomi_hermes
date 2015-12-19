@@ -36,3 +36,4 @@ allow mtk_agpsd fuse:dir create_dir_perms;
 allow mtk_agpsd fuse:file create_file_perms;
 allow mtk_agpsd ttySDIO_device:chr_file create_file_perms;
 allow mtk_agpsd eemcs_device:chr_file rw_file_perms;
+allow mtk_agpsd tmpfs:lnk_file create_file_perms;

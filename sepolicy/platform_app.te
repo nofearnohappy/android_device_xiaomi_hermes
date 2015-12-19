@@ -158,7 +158,20 @@ allow platform_app fuse:file execute;
 # Package: com.android.gallery3d
 allow platform_app radio_data_file:dir search;
 
-# Date : 2014/12/26
+# Date : 2014/12/07
+# Operation : Migration
+# Purpose : MTKLogger need setup local socket with cmddumper 
+# Package: com.mediatek.mtklogger
+allow platform_app init:unix_stream_socket connectto;
+allow platform_app cmddumper:unix_stream_socket connectto;
+
+# Date : 2014/12/30
+# Operation : TUI Migration
+# Purpose : TUI service need to access tui device driver 
+# Package: com.trustonic.tuiservice.TuiService
+allow platform_app mobicore_tui_device:chr_file { read open ioctl };
+
+# Date : 2015/01/13
 # Operation : New feature for GPS Log
 # Purpose : MTKLogger need setup local socket with mnld 
 # Package: com.mediatek.mtklogger

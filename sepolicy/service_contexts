@@ -30,3 +30,8 @@ GuiExtService       u:object_r:guiext-server_service:s0
 mtk.codecservice	u:object_r:mtk_codec_service_service:s0
 PPLAgent                   u:object_r:ppl_agent_service:s0
 media.mmsdk         u:object_r:mediaserver_service:s0
+epdg_service        u:object_r:system_server_service:s0
+rns                 u:object_r:system_server_service:s0
+program_binary      u:object_r:program_binary_service:s0
+multiwindow_service_v1 	u:object_r:system_app_service:s0
+media.VTS           u:object_r:vtservice_service:s0

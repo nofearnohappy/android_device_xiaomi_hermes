@@ -14,8 +14,9 @@ allow sdcardd platformblk_device:dir search;
 
 # Date : WK14.47
 # Purpose : create symbolic link from /mnt/shell/emulated to /storage/emulated
-allow sdcardd tmpfs:dir {write add_name};
+allow sdcardd tmpfs:dir {write add_name mounton};
 allow sdcardd tmpfs:lnk_file create;
+allow sdcardd tmpfs:filesystem unmount;
 
 # Date : WK14.48
 # Purpose : invoke vdc for handle_users
@@ -28,4 +29,8 @@ allow sdcardd vold_socket:sock_file write;
 # Date : WK14.48
 # Purpose : unknown
 allow sdcardd platform_app:fd use;
+allow sdcardd untrusted_app:fd use;
 
+# Date : WK15.02
+# Purpose : ashared memory
+allow sdcardd platform_app_tmpfs:file write;

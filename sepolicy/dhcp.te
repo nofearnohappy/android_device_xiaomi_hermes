@@ -23,10 +23,6 @@ allow dhcp kernel:system module_request;
 allow dhcp platform_app:fd use;
 allow dhcp platform_app_tmpfs:file write;
 
-
-#============= dhcp ==============
-allow dhcp unlabeled:lnk_file read;
-
 #============= dhcp ==============
 allow dhcp init:fifo_file { read write };
 allow dhcp init:unix_stream_socket { read write };

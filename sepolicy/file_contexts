@@ -22,6 +22,7 @@
 /data/lost\+found(/.*)? u:object_r:lost_found_data_file:s0
 /data/mdlog(/.*)? u:object_r:mdlog_data_file:s0
 /data/mdl(/.*)? u:object_r:mdlog_data_file:s0
+/data/mdl3(/.*)? u:object_r:mdlog_data_file:s0
 /data/mediaserver(/.*)? u:object_r:mediaserver_data_file:s0
 /data/misc/acdapi(/.*)? u:object_r:acdapi_data_file:s0
 /data/misc/akmd_set.txt u:object_r:akmd8963_access_file1:s0
@@ -35,8 +36,12 @@
 /data/misc/wpa_supplicant(/.*)? u:object_r:wpa_supplicant_data_file:s0
 /data/nfc_socket(/.*)? u:object_r:nfc_socket:s0
 /data/nvram(/.*)? u:object_r:nvram_data_file:s0
+/nvdata(/.*)? u:object_r:nvdata_file:s0
 /data/SF_dump(./*)? u:object_r:sf_bqdump_data_file:s0
-
+/data/ipsec(./*)? u:object_r:wod_ipsec_conf_file:s0
+/data/ipsec/wo(./*)? u:object_r:wod_apn_conf_file:s0
+/data/data_tmpfs_log(/.*)? u:object_r:data_tmpfs_log_file:s0
+/data/tmp_mnt/data_tmpfs_log(/.*)? u:object_r:data_tmpfs_log_file:s0
 
 ##########################
 # Devices
@@ -72,6 +77,7 @@
 /dev/devmap(/.*)? u:object_r:devmap_device:s0
 /dev/dummy_cam_cal(/.*)? u:object_r:dummy_cam_cal_device:s0 
 /dev/DW9714AF(/.*)? u:object_r:DW9714AF_device:s0
+/dev/AK7345AF(/.*)? u:object_r:AK7345AF_device:s0
 /dev/DW9714A(/.*)? u:object_r:DW9714A_device:s0
 /dev/DW9718AF(/.*)? u:object_r:DW9718AF_device:s0
 /dev/ebc(/.*)? u:object_r:ebc_device:s0
@@ -115,6 +121,7 @@
 /dev/mmp(/.*)? u:object_r:mmp_device:s0
 /dev/mobicore u:object_r:mobicore_admin_device:s0 
 /dev/mobicore-user u:object_r:mobicore_user_device:s0 
+/dev/t-base-tui u:object_r:mobicore_tui_device:s0 
 /dev/msensor(/.*)? u:object_r:msensor_device:s0
 /dev/MT6516_H264_DEC(/.*)? u:object_r:MT6516_H264_DEC_device:s0
 /dev/mt6516-IDP(/.*)? u:object_r:mt6516_IDP_device:s0
@@ -136,6 +143,7 @@
 /dev/mtk-kpd(/.*)? u:object_r:mtk_kpd_device:s0 
 /dev/mtk_sched(/.*)? u:object_r:mtk_sched_device:s0
 /dev/MTK_SMI(/.*)? u:object_r:MTK_SMI_device:s0
+/dev/mtk_rrc(/.*)? u:object_r:mtk_rrc_device:s0
 /dev/mt-mdp(/.*)? u:object_r:mt_mdp_device:s0
 /dev/mt_otg_test(/.*)? u:object_r:mt_otg_test_device:s0
 /dev/MT_pmic_adc_cali        u:object_r:MT_pmic_adc_cali_device:s0
@@ -214,6 +222,7 @@
 /dev/socket/rild-oem(/.*)? u:object_r:rild_oem_socket:s0
 /dev/socket/rild(/.*)? u:object_r:rild_socket:s0
 /dev/socket/rild-via u:object_r:rild_via_socket:s0
+/dev/socket/rild-atci-c2k(/.*)? u:object_r:rild_atci_c2k_socket:s0
 /dev/socket/rpc u:object_r:rpc_socket:s0
 /dev/socket/soc_vt_stk(/.*)? u:object_r:soc_vt_stk_socket:s0
 /dev/socket/soc_vt_svc(/.*)? u:object_r:soc_vt_svc_socket:s0
@@ -224,6 +233,9 @@
 /dev/socket/volte_imsa1(/.*)? u:object_r:volte_imsa1_socket:s0
 /dev/socket/wpa_wlan0(/.*)? u:object_r:wpa_wlan0_socket:s0
 /dev/socket/zygote(/.*)? u:object_r:zygote_socket:s0
+/dev/socket/wod_action(/.*)? u:object_r:wod_action_socket:s0
+/dev/socket/wod_sim(/.*)? u:object_r:wod_sim_socket:s0
+/dev/socket/wod_ipsec(/.*)? u:object_r:wod_ipsec_socket:s0
 /dev/socket/tunman(/.*)? u:object_r:tunman_socket:s0
 /dev/stpant(/.*)? u:object_r:stpant_device:s0
 /dev/stpbt(/.*)? u:object_r:stpbt_device:s0
@@ -259,12 +271,17 @@
 /dev/wmtdetect(/.*)? u:object_r:wmtdetect_device:s0
 /dev/wmtWifi(/.*)? u:object_r:wmtWifi_device:s0
 /dev/xlog u:object_r:xlog_device:s0
+/dev/offloadservice(/.*)? u:object_r:offloadservice_device:s0
+/dev/irtx u:object_r:irtx_device:s0
+
 /dev/xt_qtaguid(/.*)? u:object_r:xt_qtaguid_device:s0
 /dev/pmic_ftm(/.*)? u:object_r:pmic_ftm_device:s0
 /dev/shf                 u:object_r:shf_device:s0
 /protect_f(/.*)?         u:object_r:protect_f_data_file:s0
 /protect_s(/.*)?         u:object_r:protect_s_data_file:s0
 /persist(/.*)?         u:object_r:persist_data_file:s0
+/dev/ttyACM0        u:object_r:ttyACM_device:s0
+/dev/hrm       u:object_r:hrm_device:s0
 
 #############################
 # sysfs files
@@ -298,6 +315,7 @@
 /system/bin/autokd u:object_r:autokd_exec:s0
 /system/bin/batterywarning u:object_r:batterywarning_exec:s0
 /system/bin/bmm050d u:object_r:bmm050d_exec:s0
+/system/bin/bmm056d u:object_r:bmm056d_exec:s0
 /system/bin/boot_logo_updater u:object_r:boot_logo_updater_exec:s0
 /system/bin/br_app_data_service u:object_r:br_app_data_service_exec:s0
 /system/bin/ccci_fsd u:object_r:ccci_fsd_exec:s0
@@ -314,6 +332,7 @@
 /system/bin/em_svr u:object_r:em_svr_exec:s0
 /system/bin/factory u:object_r:factory_exec:s0
 /system/bin/flashlessd u:object_r:flashlessd_exec:s0
+/system/bin/fuelgauged u:object_r:fuelgauged_exec:s0
 /system/bin/geomagneticd u:object_r:geomagneticd_exec:s0
 /system/bin/GoogleOtaBinder u:object_r:GoogleOtaBinder_exec:s0
 /system/bin/gsm0710muxdmd2 u:object_r:gsm0710muxdmd2_exec:s0
@@ -330,7 +349,7 @@
 /system/bin/memsicd3416x u:object_r:memsicd3416x_exec:s0
 /system/bin/memsicd u:object_r:memsicd_exec:s0
 /system/bin/meta_tst u:object_r:meta_tst_exec:s0
-
+ 
 /system/bin/mmp u:object_r:mmp_exec:s0
 /system/bin/mobile_log_d u:object_r:mobile_log_d_exec:s0
 /system/bin/mpud6050 u:object_r:mpud6050_exec:s0
@@ -351,6 +370,7 @@
 /system/bin/pppd_dt u:object_r:pppd_dt_exec:s0
 /system/bin/pppd_via u:object_r:pppd_via_exec:s0
 /system/bin/pq u:object_r:pq_exec:s0
+/system/bin/program_binary_service u:object_r:program_binary_exec:s0
 /system/bin/resmon u:object_r:resmon_exec:s0
 /system/bin/rild_dongle u:object_r:ril-3gddaemon_exec:s0
 /system/bin/s62xd u:object_r:s62xd_exec:s0
@@ -376,6 +396,17 @@
 /system/xbin/BGW u:object_r:BGW_exec:s0
 /system/xbin/mnld u:object_r:mnld_exec:s0
 /system/bin/md_ctrl u:object_r:md_ctrl_exec:s0
+/system/bin/cmddumper u:object_r:cmddumper_exec:s0
+/system/bin/epdg_wod u:object_r:epdg_wod_exec:s0
+/system/bin/ipsec u:object_r:ipsec_exec:s0
+/system/bin/charon u:object_r:charon_exec:s0
+/system/bin/starter u:object_r:starter_exec:s0
+/system/bin/stroke u:object_r:stroke_exec:s0
+/system/bin/istd8303 u:object_r:istd8303_exec:s0
+/system/bin/mmc3524xd u:object_r:mmc3524xd_exec:s0
+/system/bin/mc6470d u:object_r:mc6470d_exec:s0
+/system/bin/qmcX983d u:object_r:qmcX983d_exec:s0
+/system/bin/vtservice u:object_r:vtservice_exec:s0
 
 # Wallpaper file for smartbook
 /data/system/users/[0-9]+/smartbook_wallpaper	u:object_r:wallpaper_file:s0

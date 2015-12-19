@@ -26,6 +26,7 @@ allow gsm0710muxd gsm0710muxd_device:chr_file open;
 allow gsm0710muxd gsm0710muxd_device:chr_file { read write };
 allow gsm0710muxd ctl_rildaemon_prop:property_service set;
 allow gsm0710muxd ctl_ril-daemon-mtk_prop:property_service set;
+allow gsm0710muxd gsm0710muxd_prop:property_service set;
 allow gsm0710muxd devpts:chr_file setattr;
 allow gsm0710muxd device:dir write;
 allow gsm0710muxd self:capability chown;

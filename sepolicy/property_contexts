@@ -51,6 +51,9 @@ debug.mtk.aee u:object_r:debug_mtk_aee_prop:s0
 #=============allow AEE_Dumpstate==============
 debug.bq.dump u:object_r:debug_bq_dump_prop:s0
 
+#=============allow mux==============
+ril.mux.      u:object_r:gsm0710muxd_prop:s0
+
 #=============allow vold==============
 persist.vold.      u:object_r:vold_prop:s0
 ctl.sdcard         u:object_r:ctl_fuse_prop:s0
@@ -59,14 +62,17 @@ ctl.sdcard         u:object_r:ctl_fuse_prop:s0
 ctl.ril-daemon-mtk   u:object_r:ctl_ril-daemon-mtk_prop:s0
 ctl.ril-daemon-s   u:object_r:ctl_ril-daemon-s_prop:s0
 ctl.ril-daemon-d   u:object_r:ctl_ril-daemon-d_prop:s0
-ctl.ril-daemon-mtkmd2   u:object_r:ctl_ril-daemon-md2_prop:s0
+ctl.ril-daemon-md2   u:object_r:ctl_ril-daemon-md2_prop:s0
 
 ctl.ccci_fsd         u:object_r:ctl_ccci_fsd_prop:s0
 ctl.ccci2_fsd         u:object_r:ctl_ccci2_fsd_prop:s0
+ctl.ccci_rpcd         u:object_r:ctl_ccci_rpcd_prop:s0
+ctl.ccci2_rpcd         u:object_r:ctl_ccci2_rpcd_prop:s0
 ctl.muxreport-daemon u:object_r:ctl_muxreport-daemon_prop:s0
 
 ril.active.md        u:object_r:ril_active_md_prop:s0
 ril.mux.report.case  u:object_r:ril_mux_report_case_prop:s0
+ril.cdma.report      u:object_r:ril_cdma_report_prop:s0
 
 #=============allow pppd_via==============
 ctl.pppd_via         u:object_r:ctl_pppd_via_prop:s0
@@ -104,6 +110,7 @@ ctl.rbfota u:object_r:ctl_rbfota_prop:s0
 
 #=============allow atcid==============
 ctl.atcid-daemon-u u:object_r:ctl_atcid-daemon-u_prop:s0
+ctl.atci_service u:object_r:ctl_atci_service_prop:s0
 persist.service.atci.   u:object_r:persist_service_atci_prop:s0
 
 #=============allow ipod==============
@@ -113,6 +120,7 @@ persist.ipoh.           u:object_r:ipod_prop:s0
 
 #=============allow wmt ==============
 persist.mtk.wcn u:object_r:wmt_prop:s0
+service.wcn u:object_r:wmt_prop:s0
 
 #============= permission_check ==============
 #persist.md.perm.checked
@@ -128,7 +136,12 @@ ctl.geomagneticd     u:object_r:ctl_geomagneticd_prop:s0
 ctl.orientationd     u:object_r:ctl_orientationd_prop:s0
 ctl.emdlogger5       u:object_r:ctl_emcsmdlogger_prop:s0
 ctl.eemcs_fsd         u:object_r:ctl_eemcs_fsd_prop:s0
-
+ctl.istd8303            u:object_r:ctl_istd8303_prop:s0
+ctl.st480                u:object_r:ctl_st480_prop:s0
+ctl.mmc3524xd	u:object_r:ctl_mmc3524xd_prop:s0
+ctl.mc6470d	u:object_r:ctl_mc6470d_prop:s0
+ctl.qmcX983d	u:object_r:ctl_qmcX983d_prop:s0
+ctl.af7133e      u:object_r:ctl_af7133e_prop:s0
 #=============allow statusd==============
 net.cdma.mdmstat u:object_r:net_cdma_mdmstat:s0
 
@@ -144,3 +157,10 @@ bt.                         u:object_r:bt_prop:s0
 persist.bt.          u:object_r:persist_bt_prop:s0
 #=============allow ccci_mdinit EVDO ==============
 mtk_telephony   u:object_r:mtk_tele_prop:s0
+#=============allow ccci_mdinit md status ==============
+mtk.md   u:object_r:mtk_md_prop:s0
+#=============allow pppd ==============
+ctl.pppd_gprs   u:object_r:pppd_gprs_prop:s0
+
+#=============allow wifi offload deamon  ==============
+net.wo.   u:object_r:mtk_wod_prop:s0

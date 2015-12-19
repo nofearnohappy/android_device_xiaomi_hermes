@@ -15,6 +15,7 @@ allow debuggerd etb_device:chr_file { read write ioctl open };
 allow debuggerd graphics_device:dir search;
 allow debuggerd graphics_device:chr_file r_file_perms;
 allow debuggerd Vcodec_device:chr_file r_file_perms;
+allow debuggerd camera_isp_device:chr_file r_file_perms;
 
 # AED start: /dev/block/expdb
 allow debuggerd block_device:dir search;
@@ -51,6 +52,10 @@ allow debuggerd aee_dumpsys_data_file:file create_file_perms;
 #/data/core
 allow debuggerd aee_core_data_file:dir create_dir_perms;
 allow debuggerd aee_core_data_file:file create_file_perms;
+
+# /data/data_tmpfs_log
+allow debuggerd data_tmpfs_log_file:dir create_dir_perms;
+allow debuggerd data_tmpfs_log_file:file create_file_perms;
 
 allow debuggerd shell_data_file:dir search;
 allow debuggerd shell_data_file:file r_file_perms;
@@ -119,11 +124,8 @@ allow debuggerd zygote_exec:file { execute execute_no_trans };
 #/proc/driver/storage_logger
 allow debuggerd proc_slogger:file { write read open };
 
-# aee_dumpstate df
-allow debuggerd unlabeled:filesystem getattr;
-
 # MOTA upgrade from JB->L: aee_dumpstate(ps top df dmesg)
-allow debuggerd unlabeled:lnk_file read;
+# allow debuggerd unlabeled:lnk_file read;
 
 allow debuggerd dalvikcache_data_file:dir { write add_name remove_name};
 allow debuggerd dalvikcache_data_file:file { write create setattr };
@@ -151,4 +153,4 @@ allow debuggerd sf_bqdump_data_file:file { read getattr unlink open };
 allow debuggerd custom_file:dir search;
 
 # avc:  denied  { read } for  pid=4503 comm="screencap" name="secmem0" dev="proc" 
-allow debuggerd proc_secmem:file { r_file_perms write };
+allow debuggerd proc_secmem:file r_file_perms;

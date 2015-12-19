@@ -41,3 +41,8 @@ allow enableswap system_file:file execute_no_trans;
 allow enableswap system_data_file:file { create open write };
 allow enableswap system_data_file:dir { write add_name };
 allow enableswap self:capability dac_override;
+
+# Date : WK15.05
+# Operation : Migration
+# Purpose : Allow more operations on init_tmpfs
+allow enableswap init_tmpfs:file write;

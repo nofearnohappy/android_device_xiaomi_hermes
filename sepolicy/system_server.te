@@ -2,6 +2,10 @@
 # MTK Policy Rule
 # ============
 
+# Date : WK15.02
+# Operation : 120Hz Feature SQC
+# Purpose : for 120Hz Smart Switch
+allow system_server mtk_rrc_device:chr_file { read write ioctl open };
 # Date : WK14.31
 # Operation : Migration 
 # Purpose : for bring up
@@ -147,6 +151,8 @@ allow system_server sf_rtt_file:dir r_dir_perms;
 # Purpose : for mtk gps epos library useage
 allow system_server devmap_device:chr_file r_file_perms;
 
+allow system_server irtx_device:chr_file { read write ioctl open };
+
 # Date : WK14.46
 # Operation : Migration
 # Purpose : for MTK Emulator HW GPU
@@ -213,3 +219,13 @@ allow system_server exm0_device:chr_file { read write open };
 # Purpose : for querying zygote socket
 allow system_server zygote:unix_stream_socket { getopt getattr };
 
+# Date: WK14.52
+# Operation : Feature developing
+# Purpose : Communicate with native daemon (epdg_wod)
+unix_socket_connect(system_server, wod_action, epdg_wod)
+unix_socket_connect(system_server, wod_sim, epdg_wod)
+
+# Date: WK15.05
+# Purpose : for kill-switch should only grant to access frp partition, to be fix
+allow system_server platformblk_device:blk_file { ioctl getattr open write read };
+allow system_server platformblk_device:dir search;

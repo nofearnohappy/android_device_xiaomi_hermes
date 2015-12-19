@@ -35,3 +35,9 @@ allow autokd sysfs:file write;
 allow autokd system_data_file:dir { read write open add_name remove_name };
 allow autokd system_data_file:file { write create open append };
 allow autokd system_file:file execute_no_trans;
+allow autokd block_device:dir search;
+allow autokd nvram_data_file:dir {search read write getattr add_name remove_name };
+allow autokd nvram_data_file:file { read write getattr create open };
+allow autokd platformblk_device:dir search;
+allow autokd platformblk_device:blk_file { open read write };
+

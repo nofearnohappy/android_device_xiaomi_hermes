@@ -80,6 +80,8 @@ allow mtkrild ctl_muxreport-daemon_prop:property_service set;
 allow mtkrild persist_service_atci_prop:property_service set;
 allow mtkrild block_device:dir search;
 allow mtkrild platformblk_device:dir search;
+allow mtkrild platform_app:fd use;
+allow mtkrild radio:fd use;
 
 # For emulator
 allow mtkrild qemu_pipe_device:chr_file rw_file_perms;

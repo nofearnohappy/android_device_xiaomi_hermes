@@ -67,6 +67,7 @@ type protect_f_data_file, file_type, data_file_type;
 type protect_s_data_file, file_type, data_file_type;
 type persist_data_file, file_type, data_file_type;
 type nvram_data_file, file_type, data_file_type;
+type nvdata_file, file_type, data_file_type;
 type mediaserver_data_file, file_type, data_file_type;
 
 # 20131213 KKMR1_CQ_CTS_02
@@ -117,10 +118,29 @@ type bmm050_sensor_log_file, file_type,data_file_type;
 type sysfs_gsensor_file, file_type,sysfs_type;
 type sysfs_msensor_file, file_type,sysfs_type;
 type sysfs_keypad_file, file_type,sysfs_type;
+type istd8303_access_file1, file_type,data_file_type;
+type istd8303_access_file2, file_type,data_file_type;
+
 
 type rild_via_socket, file_type;
 type rpc_socket, file_type;
 type rild_ctclient_socket, file_type;
+type rild_atci_c2k_socket, file_type;
 type statusd_socket, file_type;
 #For icusb
 type proc_icusb, fs_type;
+
+#for drm key install
+type provision_file, file_type, data_file_type;
+#20141222 Add EPDG socket usage
+type wod_ipsec_conf_file, file_type, data_file_type;
+type wod_apn_conf_file, file_type, data_file_type;
+type wod_action_socket, file_type;
+type wod_sim_socket, file_type;
+type wod_ipsec_socket, file_type;
+
+# for labeling /mnt/cd-rom as iso9660 
+type iso9660, fs_type;
+
+# data_tmpfs_log
+type data_tmpfs_log_file, file_type, data_file_type;

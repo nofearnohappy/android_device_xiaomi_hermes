@@ -73,19 +73,6 @@ PRODUCT_PACKAGES += \
     libbt-vendor
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/bt_did.conf:system/etc/bluetooth/bt_did.conf
-
-# Battery                            
-PRODUCT_PACKAGES += \
-    batterywarning
-
-# Consumerir                           
-PRODUCT_PACKAGES += \
-      consumerir.mt6795
-
-
-# GPS
-PRODUCT_COPY_FILES += \
-     $(LOCAL_PATH)/configs/agps_profiles_conf2.xml:system/etc/agps_profiles_conf2.xml 
      
 # Keyboard layout
 PRODUCT_COPY_FILES += \
@@ -95,11 +82,7 @@ PRODUCT_COPY_FILES += \
 
 #Light    
 PRODUCT_PACKAGES += \
-      lights.mt6795  
-
-# gps_mtk
-#PRODUCT_PACKAGES += \
-      #gps.default  
+      lights.mt6795 
 
 # Ramdisk
 PRODUCT_COPY_FILES += \
@@ -110,7 +93,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ramdisk/fstab.mt6795:root/fstab.mt6795 \
     $(LOCAL_PATH)/ramdisk/init.aee.rc:root/init.aee.rc \
     $(LOCAL_PATH)/ramdisk/init.modem.rc:root/init.modem.rc \
-    $(LOCAL_PATH)/ramdisk/init:root/init \
     $(LOCAL_PATH)/ramdisk/init.mt6795.rc:root/init.mt6795.rc \
     $(LOCAL_PATH)/ramdisk/init.mt6795.usb.rc:root/init.mt6795.usb.rc \
     $(LOCAL_PATH)/ramdisk/init.project.rc:root/init.project.rc \
@@ -120,6 +102,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ramdisk/meta_init.modem.rc:root/meta_init.modem.rc \
     $(LOCAL_PATH)/ramdisk/meta_init.project.rc:root/meta_init.project.rc \
     $(LOCAL_PATH)/ramdisk/meta_init.rc:root/meta_init.rc \
+    $(LOCAL_PATH)/ramdisk/init:root/init \
    
 
 # Telecom
@@ -211,6 +194,25 @@ PRODUCT_PACKAGES += \
 # STk
 PRODUCT_PACKAGES += \
     Stk
+
+# GPS
+PRODUCT_PACKAGES += \
+    YGPS
+
+PRODUCT_COPY_FILES += \
+     $(LOCAL_PATH)/configs/agps_profiles_conf2.xml:system/etc/agps_profiles_conf2.xml \
+
+# FM
+PRODUCT_PACKAGES += \
+    autofmd \
+    autofm \
+    FMRadio \
+    FMTransmitter
+
+# APK
+PRODUCT_PACKAGES += \
+    MiraVision \
+    libMiraVision_jni
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
      ro.adb.secure=0 \

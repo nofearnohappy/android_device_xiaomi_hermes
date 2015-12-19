@@ -23,3 +23,7 @@ allow volte_imcb port:tcp_socket name_bind;
 allow volte_imcb self:tcp_socket { bind create setopt accept listen };
 allow volte_imcb socket_device:sock_file write;
 allow volte_imcb volte_ua:unix_stream_socket connectto;
+allow volte_imcb fwmarkd_socket:sock_file write;
+allow volte_imcb self:tcp_socket { read getattr };
+allow volte_imcb netd:unix_stream_socket connectto;
+allow volte_imcb self:tcp_socket write;

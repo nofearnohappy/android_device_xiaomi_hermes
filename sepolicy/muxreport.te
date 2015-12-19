@@ -22,3 +22,4 @@ allow muxreport property_socket:sock_file write;
 allow muxreport devpts:chr_file { read write getattr ioctl };
 allow muxreport self:capability dac_override;
 allow muxreport eemcs_device:chr_file { read write ioctl open };
+allow muxreport emd_device:chr_file { read write open };

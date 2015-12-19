@@ -36,3 +36,8 @@ allow ppp system_prop:property_service set;
 # Purpose: for PPPOE Test 
 
 allow ppp ppp_exec:file execute_no_trans;
+
+# Date : WK14.53
+# Operation : check in 
+# Purpose: for warning kernel API 
+allow ppp mtp:file read;

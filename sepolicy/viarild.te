@@ -39,6 +39,7 @@ allow viarild system_file:file x_file_perms;
 allow viarild proc:file write;
 
 # property service
+allow statusd system_prop:property_service set;
 allow viarild radio_prop:property_service set;
 allow viarild net_radio_prop:property_service set;
 allow viarild system_radio_prop:property_service set;
@@ -72,3 +73,6 @@ allow viarild platformblk_device:blk_file { read write open };
 allow viarild proc_lk_env:file { read ioctl open };
 allow viarild sysfs_vcorefs_pwrctrl:file { open write };
 allow viarild ril_active_md_prop:property_service set;
+
+#Search permission for findPidByName
+allow statusd domain:dir search;

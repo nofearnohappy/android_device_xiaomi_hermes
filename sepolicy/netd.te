@@ -77,11 +77,44 @@ allow netd device:file { open write };
 
 # Date : WK14.44
 # Operation : Migration
-# Purpose : ALPS01789552 [K2 64Bits][IPv6]USB Tethering assert (4G)/3G occur when enable USB tethering - SELINUX netd
+# Purpose : ALPS01789552
 #============= netd ==============
 allow netd self:capability { setuid setgid };
 
 
-
 #============= netd ==============
 allow netd isolated_app_tmpfs:file write;
+
+# Date : W14.52
+# Operation : Migration
+# Purpose :  add ePDG support
+allow netd ipsec:fd use;
+allow netd ipsec:tcp_socket { read write setopt getopt };
+
+#============= netd ==============
+allow netd untrusted_app:fd use;
+allow netd untrusted_app_tmpfs:file write;
+
+#============= netd ==============
+# Date : W14.53
+# Operation : Migration
+# Purpose :  For volte_imcb ut
+allow netd volte_imcb:fd use;
+allow netd volte_imcb:tcp_socket { read write };
+allow netd volte_imcb:tcp_socket getopt;
+allow netd volte_imcb:tcp_socket setopt;
+
+
+# Date : W15.02
+# Operation :  SQC
+# Purpose :  CTS for wifi
+allow netd untrusted_app:unix_stream_socket { read write getopt setopt};
+
+allow netd isolated_app:fd use;
+
+
+#============= netd ==============
+allow netd radio_tmpfs:file write;
+
+
+

@@ -41,6 +41,9 @@ allow eemcs_mdinit sysfs:file write;
 
 allow eemcs_mdinit nvram_data_file:dir rw_dir_perms;
 allow eemcs_mdinit nvram_data_file:file create_file_perms;
+allow eemcs_mdinit nvram_data_file:lnk_file read;
+allow eemcs_mdinit nvdata_file:dir rw_dir_perms;
+allow eemcs_mdinit nvdata_file:file create_file_perms;
 allow eemcs_mdinit nvram_device:chr_file { read write open };
 
 allow eemcs_mdinit protect_f_data_file:dir rw_dir_perms;
@@ -68,3 +71,5 @@ allow eemcs_mdinit ttyMT_device:chr_file { read write ioctl open };
 allow eemcs_mdinit system_prop:property_service set;
 
 allow eemcs_mdinit block_device:dir search;
+allow eemcs_mdinit ccci_cfg_file:dir create_dir_perms;
+allow eemcs_mdinit ccci_cfg_file:file create_file_perms;

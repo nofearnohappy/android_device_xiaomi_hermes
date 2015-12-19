@@ -9,6 +9,7 @@ type mobicore, domain;
 type mobicore_exec, exec_type, file_type;
 type mobicore_admin_device, dev_type;
 type mobicore_user_device, dev_type;
+type mobicore_tui_device, dev_type;
 type mobicore_data_file, file_type, data_file_type;
 
 # ==============================================

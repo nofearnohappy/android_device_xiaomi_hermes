@@ -27,6 +27,8 @@ type ctl_eemcs_fmdl_prop, property_type;
 type persist_ril_prop, property_type;
 #=============allow terserver to set terservice property==============
 type terservice_prop, property_type;
+#=============allow gsm0710muxd to set mux property==============
+type gsm0710muxd_prop, property_type;
 
 #=============allow netlog running==============
 type debug_mtklog_prop, property_type;
@@ -59,11 +61,20 @@ type ctl_ril-daemon-md2_prop, property_type;
 type ctl_ccci_fsd_prop, property_type;
 type ctl_ccci2_fsd_prop, property_type;
 
+#=============allow ccci_mdinit to start ccci_rpcd==============
+type ctl_ccci_rpcd_prop, property_type;
+type ctl_ccci2_rpcd_prop, property_type;
+
 #=============allow ccci_mdinit to set ril_active_md_prop==============
 type ril_active_md_prop, property_type;
 
 #=============allow ccci_mdinit to stop rild==============
 type ril_mux_report_case_prop, property_type;
+type ril_cdma_report_prop, property_type;
+
+#=============allow ccci_mdinit to mtk_md_prop==============
+type mtk_md_prop, property_type;
+
 #=============allow mtkrild to start muxreport==============
 type ctl_muxreport-daemon_prop, property_type;
 
@@ -104,6 +115,7 @@ type wmt_prop, property_type;
 
 #=============allow atcid==============
 type ctl_atcid-daemon-u_prop, property_type;
+type ctl_atci_service_prop, property_type;
 type persist_service_atci_prop, property_type;
 #============= permission_check ==============
 type persist_md_prop, property_type;
@@ -118,7 +130,12 @@ type ctl_geomagneticd_prop, property_type;
 type ctl_orientationd_prop, property_type;
 type ctl_emcsmdlogger_prop, property_type;
 type ctl_eemcs_fsd_prop, property_type;
-
+type ctl_istd8303_prop, property_type;
+type ctl_st480_prop, property_type;
+type ctl_mmc3524xd_prop, property_type;
+type ctl_mc6470d_prop, property_type;
+type ctl_qmcX983d_prop, property_type;
+type ctl_af7133e_prop, property_type;
 #=============allow statusd==============
 type net_cdma_mdmstat, property_type;
 type cdma_prop, property_type;
@@ -132,3 +149,9 @@ type persist_bt_prop, property_type;
 
 #=============allow ccci_mdinit EVDO ==============
 type mtk_tele_prop, property_type;
+
+#=============allow pppd ==============
+type pppd_gprs_prop, property_type;
+
+#=============allow wifi offload deamon  ==============
+type mtk_wod_prop, property_type;

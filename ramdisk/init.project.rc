@@ -6,25 +6,6 @@ on init
     mkdir /mnt/media_rw/usbotg 0700 media_rw media_rw
     mkdir /storage/usbotg 0700 root root 
     
-    restorecon_recursive /sys/bus/spi/devices/spi0.0/setup/
-    restorecon_recursive /sys/bus/platform/drivers/fpc_irq/fpc_irq.0/
-
-on fs
-    write /proc/bootprof "start mobicore (on fs)"
-    mkdir /data/app/mcRegistry 0770 system system
-    mkdir /data/app/mcRegistry/TbStorage 0770 system system
-    chmod 0600 /dev/mobicore
-    chown system system /dev/mobicore
-    chmod 0666 /dev/mobicore-user
-    chown system system /dev/mobicore-user
-    #Mobicore daemon paths
-    export MC_AUTH_TOKEN_PATH /efs
-    start mobicore
-    write /proc/bootprof "start mobicore end (on fs)"
-    # add by GOODIX for finger print begin
-    chown system system /dev/goodix_fp_spi
-    # add by GOODIX for finger print end
-
 on post-fs-data
 
 #
@@ -88,6 +69,7 @@ on post-fs-data
     chmod 0660 /dev/LC898122AF
     chown system camera /dev/LC898122AF
 
+    chmod 0664 /dev/fpc1020
 # BT
 #    chmod 0660 /dev/stpbt
 #    chown bluetooth radio /dev/stpbt
@@ -164,38 +146,8 @@ service 66xx_launcher /system/bin/6620_launcher -m 4 -p /system/etc/firmware/
     group system
     class core
 
-#start daemon (Registry directories should already be present
-service mobicore /system/bin/mcDriverDaemon -r /system/app/mcRegistry/030b0000000000000000000000000000.drbin -r /system/app/mcRegistry/020f0000000000000000000000000000.drbin -r /system/app/mcRegistry/05120000000000000000000000000000.drbin -r /system/app/mcRegistry/070b0000000000000000000000000000.drbin  
-    user system
-    group system
-    class core
-    oneshot
+
 #
 # Connectivity related services (End)
 #
 
-service screencolor /system/bin/screencolor
-    class core
-    user root
-    group root
-    oneshot
-
-on property:persist.sys.display_prefer=*
-    start screencolor
-
-on property:persist.sys.display_ce=*
-    start screencolor
-    
-#add by lidongjie start
-on property:persist.sys.ltm_enable=*
-    start screencolor
-#add by lidongjie end
-
-#add by lizhiye start
-on property:persist.sys.display_eyecare=*
-    start screencolor
-#add by lizhiye end
-
-#add by zhaoyang start
-    chmod 0444 /proc/cmdline
-#add by lizhiye end

@@ -72,7 +72,7 @@ BOARD_USES_MTK_AUDIO := true
 #TARGET_KERNEL_CONFIG := hermes_defconfig
 TARGET_USES_64_BIT_BINDER := true
 TARGET_IS_64_BIT := true
-BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 androidboot.selinux=disabled
+BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x40078000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_MKBOOTIMG_ARGS := --base 0x40078000 --pagesize 2048 --kernel_offset 0x00008000 --ramdisk_offset 0x03f88000 --second_offset 0x00e88000 --tags_offset 0x0df88000 --board Bule
@@ -123,8 +123,6 @@ TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
 
 # RIL
 #BOARD_RIL_CLASS := $(LOCAL_PATH)/ril/
-BOARD_CONNECTIVITY_VENDOR := MediaTek
-BOARD_CONNECTIVITY_MODULE := conn_soc
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -133,11 +131,16 @@ BOARD_BLUETOOTH_DOES_NOT_USE_RFKILL := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 
 # GPS
-BOARD_GPS_LIBRARIES :=ture
-BOARD_MEDIATEK_USES_GPS :=ture
+BOARD_GPS_LIBRARIES :=true
+BOARD_CONNECTIVITY_MODULE := MT6630 
+BOARD_MEDIATEK_USES_GPS := true
+
+# FM
+MTK_FM_SUPPORT :=true
+MTK_FM_RX_SUPPORT :=true
 
 # Consumerir
-MTK_IRTX_SUPPORT :=ture
+MTK_IRTX_SUPPORT :=true
 
 # MTK_WLAN_SUPPORT
 WPA_SUPPLICANT_VERSION := VER_0_8_X
@@ -171,9 +174,6 @@ TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/ramdisk/recovery.fstab
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBA_8888"
 TARGET_USERIMAGES_USE_EXT4 := true
 
-# PREBUILT_Chromium
-#PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
-
 # SELinux
 BOARD_SEPOLICY_DIRS := \
        device/xiaomi/hermes/sepolicy
@@ -201,6 +201,11 @@ BOARD_SEPOLICY_UNION := \
     akmd8963.te \
     akmd8975.te \
     ami304d.te \
+    ist8303.te \
+    st480.te \
+    af7133e.te \
+    mc6470d.te \
+    qmcX983d.te \
     atcid.te \
     atci_service.te \
     audiocmdservice_atci.te \
@@ -225,6 +230,7 @@ BOARD_SEPOLICY_UNION := \
     enableswap.te \
     factory.te \
     fota1.te \
+    fuelgauged.te \
     geomagneticd.te \
     GoogleOtaBinder.te \
     gsm0710muxdmd2.te \
@@ -238,11 +244,13 @@ BOARD_SEPOLICY_UNION := \
     memsicd3416x.te \
     memsicd.te \
     meta_tst.te \
+    mmc_ffu.te \
     mmp.te \
     mnld.te \
     mobile_log_d.te \
     mpud6050.te \
     msensord.te \
+    mmc3524xd.te \
     mtk_6620_launcher.te \
     mtk_agpsd.te \
     mtkbt.te \
@@ -256,12 +264,15 @@ BOARD_SEPOLICY_UNION := \
     pppd_dt.te \
     pppd_via.te \
     pq.te \
+    recovery.te \
     resmon.te \
     mtkrild.te \
     mtkrildmd2.te \
     viarild.te \
     s62xd.te \
     sn.te \
+    epdg_wod.te \
+    ipsec.te \
     terservice.te \
     thermald.te \
     thermal_manager.te \
@@ -272,11 +283,17 @@ BOARD_SEPOLICY_UNION := \
     volte_imcb.te \
     volte_ua.te \
     volte_stack.te \
+    vtservice.te \
     wmt_loader.te \
     icusbd.te \
     xlog.te \
-    mobicore.te 
-     
+    mobicore.te \
+    install_recovery.te \
+    program_binary.te \
+    genfs_contexts
+
+ 
+
 BOARD_SEPOLICY_UNION += \
 	adbd.te \
 	bluetooth.te \
@@ -337,6 +354,8 @@ BOARD_SEPOLICY_UNION += \
 	usbdongled.te \
 	zpppd_gprs.te \
 	md_ctrl.te \
+	cmddumper.te \
 	tunman.te
+
 
 

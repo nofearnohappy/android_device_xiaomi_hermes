@@ -6,7 +6,10 @@
 # Operation : Migration 
 # Purpose : Access 'OMADM_USB' nvram
 allow vold nvram_data_file:file { read getattr open write create setattr};
-allow vold nvram_data_file:dir { write add_name create getattr setattr search};
+allow vold nvram_data_file:lnk_file read;
+allow vold nvram_data_file:dir { read open write add_name create getattr setattr search};
+allow vold nvdata_file:file { read getattr open write create setattr};
+allow vold nvdata_file:dir { read ioctl open write add_name create getattr setattr search};
 allow vold nvram_device:chr_file { read write open };
 allow vold platformblk_device:blk_file { read write open };
 allow vold platformblk_device:dir search;
@@ -64,19 +67,30 @@ allow vold tmpfs:lnk_file create;
 # Operation : copy the logs in /data(tmpfs) to real userdata partition
 allow vold logtemp_data_file:dir { read open getattr search};
 allow vold logtemp_data_file:file { read getattr open };
-allow vold system_data_file:dir setattr;
-allow vold system_data_file:file { write create setattr };
-allow vold mdlog_data_file:dir getattr;
-allow vold aee_exp_data_file:dir { search read getattr open };
+allow vold logmisc_data_file:dir { read open getattr search};
+allow vold logmisc_data_file:file { read getattr open };
+allow vold mdlog_data_file:dir { read open getattr search};
+allow vold mdlog_data_file:file { read getattr open };
+allow vold aee_exp_data_file:dir { read open getattr search};
 allow vold aee_exp_data_file:file { read getattr open };
-
-# Date : WK14.48
-allow vold unlabeled:dir { write add_name };
+allow vold data_tmpfs_log_file:dir { setattr getattr read create write rmdir relabelto remove_name open add_name search};
+allow vold data_tmpfs_log_file:file { write setattr getattr relabelto create unlink open };
+# mount crypto block device to /data/tmp_mnt/data_tmpfs_log and restorecon
+allow vold system_data_file:dir { relabelfrom relabelto setattr };
+allow vold system_data_file:file { relabelfrom relabelto};
 
 # Date : WK14.49
 # Purpose : ptrace process
 allow vold platform_app:process ptrace;
+allow vold mobile_log_d:process ptrace;
+
 # Date : WK14.50
 # Purpose : read/write sys env
 allow vold misc_device:chr_file read;
 
+# Date : WK15.02
+# Purpose : fsck_msdos
+allow vold platform_app:fd use;
+
+#install APK move to SD
+allow vold block_device:file create;

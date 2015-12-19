@@ -24,7 +24,7 @@ type ccci_mdinit ,domain;
 #permissive ccci_mdinit;
 init_daemon_domain(ccci_mdinit)
 #unconfined_domain(ccci_mdinit)
-
+wakelock_use(ccci_mdinit)
 #=============allow ccci_mdinit to start gsm0710muxd==============
 allow ccci_mdinit ctl_gsm0710muxd_prop:property_service set;
 #=============allow ccci_mdinit to start emcsmdlogger==============
@@ -41,9 +41,13 @@ allow ccci_mdinit { ctl_gsm0710muxd_prop ctl_gsm0710muxd-s_prop ctl_gsm0710muxd-
 allow ccci_mdinit { ctl_rildaemon_prop ctl_ril-daemon-mtk_prop ctl_ril-daemon-s_prop ctl_ril-daemon-d_prop ctl_ril-daemon-md2_prop }:property_service set;
 
 allow ccci_mdinit ril_active_md_prop:property_service set;
+allow ccci_mdinit mtk_md_prop:property_service set;
+allow ccci_mdinit radio_prop:property_service set;
 
 allow ccci_mdinit { ctl_ccci_fsd_prop ctl_ccci2_fsd_prop }:property_service set;
+allow ccci_mdinit { ctl_ccci_rpcd_prop ctl_ccci2_rpcd_prop }:property_service set;
 
+allow ccci_mdinit ccci_device:chr_file rw_file_perms;
 allow ccci_mdinit ccci_monitor_device:chr_file rw_file_perms;
 
 # TODO: Do not allow write access to all of /sys
@@ -51,6 +55,9 @@ allow ccci_mdinit sysfs:file write;
 
 allow ccci_mdinit nvram_data_file:dir rw_dir_perms;
 allow ccci_mdinit nvram_data_file:file create_file_perms;
+allow ccci_mdinit nvram_data_file:lnk_file read;
+allow ccci_mdinit nvdata_file:dir rw_dir_perms;
+allow ccci_mdinit nvdata_file:file create_file_perms;
 allow ccci_mdinit nvram_device:chr_file rw_file_perms;
 
 allow ccci_mdinit protect_f_data_file:dir rw_dir_perms;
@@ -66,7 +73,7 @@ allow ccci_mdinit mdlog_data_file:dir search;
 allow ccci_mdinit mdlog_data_file:file { read open };
 allow ccci_mdinit platformblk_device:dir search;
 
-allow ccci_mdinit ccci_cfg_file:dir { write create add_name getattr search };
+allow ccci_mdinit ccci_cfg_file:dir create_dir_perms;
 allow ccci_mdinit ccci_cfg_file:file create_file_perms;
 allow ccci_mdinit block_device:dir search;
 

@@ -9,9 +9,12 @@ import /init.usb.rc
 import /init.${ro.hardware}.rc
 import /init.${ro.zygote}.rc
 import /init.trace.rc
+# Include CM's extra init file
 import /init.cm.rc
 
+
 on early-init
+
     # Set init and its forked children's oom_adj.
     write /proc/1/oom_score_adj -1000
 
@@ -121,30 +124,18 @@ loglevel 6 ####
     mount cgroup none /dev/cpuctl cpu
     chown system system /dev/cpuctl
     chown system system /dev/cpuctl/tasks
-    chmod 0660 /dev/cpuctl/tasks
+    chmod 0666 /dev/cpuctl/tasks
     write /dev/cpuctl/cpu.shares 1024
-    write /dev/cpuctl/cpu.rt_runtime_us 950000
+    write /dev/cpuctl/cpu.rt_runtime_us 800000
     write /dev/cpuctl/cpu.rt_period_us 1000000
 
-    mkdir /dev/cpuctl/apps
-    chown system system /dev/cpuctl/apps/tasks
-    chmod 0666 /dev/cpuctl/apps/tasks
-    write /dev/cpuctl/apps/cpu.shares 1024
-    write /dev/cpuctl/apps/cpu.rt_runtime_us 800000
-    write /dev/cpuctl/apps/cpu.rt_period_us 1000000
-
-    mkdir /dev/cpuctl/apps/bg_non_interactive
-    chown system system /dev/cpuctl/apps/bg_non_interactive/tasks
-    chmod 0666 /dev/cpuctl/apps/bg_non_interactive/tasks
+    mkdir /dev/cpuctl/bg_non_interactive
+    chown system system /dev/cpuctl/bg_non_interactive/tasks
+    chmod 0666 /dev/cpuctl/bg_non_interactive/tasks
     # 5.0 %
-    write /dev/cpuctl/apps/bg_non_interactive/cpu.shares 52
-    write /dev/cpuctl/apps/bg_non_interactive/cpu.rt_runtime_us 700000
-    write /dev/cpuctl/apps/bg_non_interactive/cpu.rt_period_us 1000000
-
-# Begin Immersion changes
-#    mkdir /dev/pipes 0771 system system
-#    export VIBE_PIPE_PATH /dev/pipes
-# End Immersion changes
+    write /dev/cpuctl/bg_non_interactive/cpu.shares 52
+    write /dev/cpuctl/bg_non_interactive/cpu.rt_runtime_us 700000
+    write /dev/cpuctl/bg_non_interactive/cpu.rt_period_us 1000000
 
     # qtaguid will limit access to specific data based on group memberships.
     #   net_bw_acct grants impersonation of socket owners.
@@ -164,7 +155,6 @@ loglevel 6 ####
     mount pstore pstore /sys/fs/pstore
     chown system log /sys/fs/pstore/console-ramoops
     chmod 0440 /sys/fs/pstore/console-ramoops
-
 	# ion device
 	chmod 0666 /dev/ion
 
@@ -304,6 +294,7 @@ on post-fs-data
     # create basic filesystem structure
     mkdir /data/misc 01771 system misc
     mkdir /data/misc/adb 02750 system shell
+    mkdir /data/misc/audit 02750 audit system
     mkdir /data/misc/bluedroid 0770 bluetooth net_bt_stack
     mkdir /data/misc/bluetooth 0770 system system
     mkdir /data/misc/keystore 0700 keystore keystore
@@ -350,12 +341,13 @@ on post-fs-data
 
     # create directory for DRM plug-ins - give drm the read/write access to
     # the following directory.
-    mkdir /data/drm 0770 drm drm ####
-    # mkdir /data/drm 0774 drm system ####
+    mkdir /data/drm 0770 drm drm
 
     # create directory for MediaDrm plug-ins - give drm the read/write access to
     # the following directory.
     mkdir /data/mediadrm 0770 mediadrm mediadrm
+
+    mkdir /data/adb 0700 root root
 
     # symlink to bugreport storage location
     symlink /data/data/com.android.shell/files/bugreports /data/bugreports
@@ -363,11 +355,18 @@ on post-fs-data
     # Separate location for storing security policy files on data
     mkdir /data/security 0711 system system
 
+    # add for mediaserver data
+    mkdir /data/mediaserver 0775 media media
+    restorecon /data/mediaserver
+
     # Reload policy from /data/security if present.
     setprop selinux.reload_policy 1
 
     # Set SELinux security contexts on upgrade or policy update.
     restorecon_recursive /data
+    restorecon /data/data
+    restorecon /data/user
+    restorecon /data/user/0
 
     # If there is no fs-post-data action in the init.<device>.rc file, you
     # must uncomment this line, otherwise encrypted filesystems
@@ -444,6 +443,7 @@ on boot
     chown system system /sys/class/timed_output/vibrator/enable
     chown system system /sys/class/leds/keyboard-backlight/brightness
     chown system system /sys/class/leds/lcd-backlight/brightness
+    chown system system /sys/class/leds/torch-light/brightness
     chown system system /sys/class/leds/button-backlight/brightness
     chown system system /sys/class/leds/jogball-backlight/brightness
     chown system system /sys/class/leds/red/brightness
@@ -471,12 +471,8 @@ chown system  system  /sys/class/leds/violet/trigger
     chown system system /sys/kernel/ipv4/tcp_rmem_def
     chown system system /sys/kernel/ipv4/tcp_rmem_max
     chown root radio /proc/cmdline
-
-#	write /sys/class/input/input9/mag_position 0
-#	write /sys/class/input/input8/mag_position 0
 	chown system root /sys/class/input/input9/mag_hard_offset
 	chmod 0660 /sys/class/input/input9/mag_hard_offset
-
 
     # Define default initial receive window size in segments.
     setprop net.tcp.default_init_rwnd 60
@@ -558,7 +554,12 @@ service console /system/bin/sh
     console
     disabled
     user shell
+    group shell log
     seclabel u:r:shell:s0
+
+service auditd /system/bin/auditd -k
+    seclabel u:r:logd:s0
+    class main
 
 on property:ro.debuggable=1
     start console
@@ -581,12 +582,6 @@ service bmi160d /system/bin/bmi160d
 on property:ro.kernel.qemu=1
     start adbd
 
-service mdbd /sbin/mdbd
-    class core
-    socket mdbd stream 660 system system
-    disabled
-    seclabel u:r:mdbd:s0
-
 service lmkd /system/bin/lmkd
     class core
     critical
@@ -602,7 +597,6 @@ service servicemanager /system/bin/servicemanager
     onrestart restart media
     onrestart restart surfaceflinger
     onrestart restart drm
-    onrestart restart shelld
 
 service vold /system/bin/vold
     class core
@@ -671,8 +665,7 @@ service encrypt /system/bin/vdc --wait cryptfs enablecrypto inplace default
 service bootanim /system/bin/bootanimation
     class core
     user graphics
-#    group graphics audio ####
-    group graphics media audio ####
+    group graphics media audio
     disabled
     oneshot
 
@@ -684,6 +677,11 @@ service flash_recovery /system/bin/install-recovery.sh
     class main
     seclabel u:r:install_recovery:s0
     oneshot
+    disabled
+
+# update recovery if enabled
+on property:persist.sys.recovery_update=true
+    start flash_recovery
 
 service racoon /system/bin/racoon
     class main
@@ -724,20 +722,6 @@ service pre-recovery /system/bin/uncrypt
     class main
     disabled
     oneshot
-
-# Begin Immersion changes
-# TouchSense Player Service
-#service immvibed /system/bin/immvibed -p 99 -u 1000
-#    class main
-#    user root
-#    group root
-# End Immersion changes
-
-#service yamaha537 /system/bin/yamaha537
-#  class main
-#    user system
-#    group system input
-
 #add by lizhiye, for atmel tp
 on post-fs-data
 chown root root /system/bin/init.atmel_ts.sh

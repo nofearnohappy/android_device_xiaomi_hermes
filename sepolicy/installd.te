@@ -3,7 +3,7 @@
 
 # Date : WK14.34
 # Operation : Migration
-# Purpose : 6571/6572 LCA external memory access(/dev/exm0)
+# Purpose : 6571/6572 GMO external memory access(/dev/exm0)
 allow installd exm0_device:chr_file { read write ioctl open };
 
 # Date : WK14.34
@@ -23,8 +23,8 @@ allow installd custom_file:file { getattr read open };
 allow installd custom_file:dir search;
 
 # Date : WK14.34
-# Operation : Development LCA Feature "Move OAT to SD Card"
-# Purpose : for LCA ROM Size Slim
+# Operation : Development GMO Feature "Move OAT to SD Card"
+# Purpose : for GMO ROM Size Slim
 allow installd dalvikcache_data_file:lnk_file { read getattr setattr unlink create };
 allow installd fuse:dir { write read remove_name search create add_name getattr setattr };
 allow installd fuse:file { write getattr setattr read create unlink open };
@@ -37,10 +37,21 @@ allow installd vfat:dir search;
 # Date : WK14.44
 # Operation : SQC1
 # Purpose : for phone encrypted
-allow installd unlabeled:fifo_file write;
-allow installd unlabeled:sock_file write;
+# Disabled 20150109 for bad policy review (ALPS01902735)
+#allow installd unlabeled:fifo_file write;
+#allow installd unlabeled:sock_file write;
 
 # Date : WK14.46
 # Operation : SQC1
 # Purpose : MOTA update KK to L, workaround for access /data/.layout_version 
 allow installd system_data_file:file open;
+
+# Date : WK15.02
+# Operation : SQC0
+# Purpose : ALPS01889518 (MTK MTBF)
+allow installd platform_app:fd use;
+
+# Date : WK15.03
+# Operation : SQC1
+# Purpose : ALPS01911340 (MTK MTBF for GMO project)
+allow installd platform_app_tmpfs:file { open read write getattr };

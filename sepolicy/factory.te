@@ -29,6 +29,12 @@ init_daemon_domain(factory)
 allow factory FM50AF_device:chr_file { read write ioctl open };
 allow factory AD5820AF_device:chr_file { read write ioctl open };
 allow factory DW9714AF_device:chr_file { read write ioctl open };
+allow factory DW9714A_device:chr_file { read write ioctl open };
+allow factory LC898122AF_device:chr_file { read write ioctl open };
+allow factory LC898212AF_device:chr_file { read write ioctl open };
+allow factory BU6429AF_device:chr_file { read write ioctl open };
+allow factory DW9718AF_device:chr_file { read write ioctl open };
+allow factory BU64745GWZAF_device:chr_file { read write ioctl open };
 allow factory MTK_SMI_device:chr_file { read ioctl open };
 allow factory accdet_device:chr_file { read ioctl open };
 allow factory als_ps_device:chr_file { read ioctl open };
@@ -87,11 +93,14 @@ allow factory ttyGS_device:chr_file { read write open };
 allow factory wmtWifi_device:chr_file { write open };
 allow factory nvram_data_file:dir { create_dir_perms };
 allow factory nvram_data_file:file { create_file_perms };
+allow factory nvram_data_file:lnk_file read;
+allow factory nvdata_file:dir { create_dir_perms };
+allow factory nvdata_file:file { create_file_perms };
 allow factory self:capability { sys_nice sys_time };
 allow factory system_data_file:dir { write add_name };
 allow factory rootfs:dir mounton;
-allow factory vfat:dir { read open };
-allow factory vfat:filesystem mount;
+allow factory vfat:dir { read open search mounton };
+allow factory vfat:filesystem { mount unmount };
 allow factory block_device:dir search;
 allow factory graphics_device:dir search;
 allow factory input_device:dir search;
@@ -105,11 +114,13 @@ allow factory audio_device:dir search;
 allow factory nvram_data_file:dir search;
 allow factory audiohal_prop:property_service set;
 allow factory pmic_ftm_device:chr_file { read write ioctl open};
-allow factory vfat:dir mounton;
-allow factory vfat:filesystem unmount;
 allow factory powerctl_prop:property_service set;
 allow factory ttyGS_device:chr_file { read write open ioctl};
-
+allow factory ttyMT_device:chr_file { read write open ioctl};
+allow factory irtx_device:chr_file { read write ioctl open };
+allow factory devpts:chr_file { read write getattr ioctl };
+allow factory vfat:dir search;
+allow factory hrm_device:chr_file { read ioctl open };
 
 # Date: WK14.47
 # Operation : Migration
@@ -118,3 +129,10 @@ allow factory eemcs_device:chr_file { read write ioctl open };
 
 # Purpose : SDIO
 allow factory ttySDIO_device:chr_file { read write ioctl open };
+
+# Date: WK15.01
+# Purpose : OTG Mount
+allow factory fuse:dir mounton;
+# Date: WK15.07
+# Purpose : use c2k flight mode;
+allow factory vmodem_device:chr_file { read write ioctl open };

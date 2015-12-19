@@ -45,6 +45,9 @@ allow nvram_daemon system_prop:property_service set;
 allow nvram_daemon shell_exec:file { x_file_perms read open };
 allow nvram_daemon nvram_data_file:dir create_dir_perms;
 allow nvram_daemon nvram_data_file:file create_file_perms;
+allow nvram_daemon nvram_data_file:lnk_file read;
+allow nvram_daemon nvdata_file:dir create_dir_perms;
+allow nvram_daemon nvdata_file:file create_file_perms;
 
 allow nvram_daemon system_file:file execute_no_trans;
 

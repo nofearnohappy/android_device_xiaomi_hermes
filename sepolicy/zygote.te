@@ -48,5 +48,26 @@ allow zygote servicemanager:binder call;
 
 # Date : WK14.49
 # Operation : SQC
-# Purpose : for isolated_app to use fd (ex: share image by gmail) (ALPS01848153)
+# Purpose : for isolated_app to use fd (ex: share image by gmail)
 allow zygote isolated_app:fd use;
+
+# Date : WK15.02
+# Operation : SQC
+# Purpose : for Chrome search (ALPS01897864)
+allow zygote isolated_app_tmpfs:file write;
+
+# Date : WK15.02
+# Operation : SQC
+# Purpose : for "theScore Sports & Scores" app to play video(ALPS01897019)
+allow zygote untrusted_app:fd use;
+
+# Date : WK15.03
+# Operation : SQC
+# Purpose : for FB webpage loading
+allow zygote untrusted_app_tmpfs:file write;
+
+# Date : WK15.08
+# Operation : SQC
+# Purpose : for TTLIA
+allow zygote radio:fd use;
+allow zygote radio_tmpfs:file create_file_perms;

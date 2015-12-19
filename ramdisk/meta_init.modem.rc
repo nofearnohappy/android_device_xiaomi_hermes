@@ -16,12 +16,7 @@ on post-fs
     # insmod /system/lib/modules/ccci.ko
 #  Build-in Modified - E
     chown radio radio /sys/kernel/ccci/boot
-	
-#SeLinux
-    mkdir /data/ccci_cfg 0700 system radio
-    restorecon /data/ccci_cfg
-    restorecon_recursive /protect_f
-    restorecon_recursive /protect_s
+
     
 service permission_check /system/bin/permission_check
     class main
@@ -38,3 +33,12 @@ service ccci_mdinit /system/bin/ccci_mdinit 0
     user system
     group radio system
     oneshot
+
+on post-fs-data
+
+#SeLinux
+    mkdir /data/ccci_cfg 0770 system radio
+    restorecon /data/ccci_cfg
+    restorecon_recursive /protect_f
+    restorecon_recursive /protect_s
+

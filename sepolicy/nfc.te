@@ -99,6 +99,13 @@ allow nfc zygote:unix_stream_socket { getopt getattr };
 allow nfc init:unix_stream_socket { write read setopt };
 
 
+# ==============================================
+# Date      : 2015/03/11
+# Operation : SQC
+# Purpose   : For platform_app_tmpfs
+allow nfc platform_app_tmpfs:file write;
+
+
 # allow nfc init_tmpfs:file read;
 # allow nfc adbd:unix_stream_socket setopt;
 # allow nfc dumpstate:fd use;

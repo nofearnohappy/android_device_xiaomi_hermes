@@ -44,6 +44,9 @@ allow nvram_agent_binder mmcblk_device:blk_file rw_file_perms;
 allow nvram_agent_binder platformblk_device:blk_file rw_file_perms;
 allow nvram_agent_binder nvram_data_file:dir create_dir_perms;
 allow nvram_agent_binder nvram_data_file:file create_file_perms;
+allow nvram_agent_binder nvram_data_file:lnk_file read;
+allow nvram_agent_binder nvdata_file:dir create_dir_perms;
+allow nvram_agent_binder nvdata_file:file create_file_perms;
 
 allow nvram_agent_binder system_file:file execute_no_trans;
 
@@ -63,3 +66,5 @@ allow nvram_agent_binder system_data_file:dir {create write add_name};
 allow nvram_agent_binder nvram_device:chr_file {read write open ioctl};
 allow nvram_agent_binder pro_info_device:chr_file {read write open ioctl};
 allow nvram_agent_binder block_device:dir search;
+
+allow nvram_agent_binder app_data_file:file write;

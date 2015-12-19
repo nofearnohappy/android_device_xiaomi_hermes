@@ -2,6 +2,10 @@
 # MTK Policy Rule
 # ==============================================
 
+# Date : WK15.02
+# Operation : 120Hz Feature SQC
+# Purpose : for 120Hz Smart Switch
+allow mediaserver mtk_rrc_device:chr_file { read write ioctl open };
 
 # Date : WK14.31
 # Operation : Migration
@@ -23,6 +27,9 @@ allow mediaserver sdcard_internal:dir { write create add_name };
 allow mediaserver sdcard_internal:file create;
 allow mediaserver nvram_data_file:dir { add_name write search };
 allow mediaserver nvram_data_file:file { write getattr setattr read create open };
+allow mediaserver nvram_data_file:lnk_file read;
+allow mediaserver nvdata_file:dir { add_name write search };
+allow mediaserver nvdata_file:file { write getattr setattr read create open };
 allow mediaserver fuse:dir remove_name;
 allow mediaserver fuse:file unlink;
 
@@ -123,6 +130,7 @@ allow mediaserver block_device:dir search;
 allow mediaserver FM50AF_device:chr_file { read write ioctl open };
 allow mediaserver AD5820AF_device:chr_file { read write ioctl open };
 allow mediaserver DW9714AF_device:chr_file { read write ioctl open };
+allow mediaserver AK7345AF_device:chr_file { read write ioctl open };
 allow mediaserver DW9714A_device:chr_file { read write ioctl open };
 allow mediaserver LC898122AF_device:chr_file { read write ioctl open };
 allow mediaserver LC898212AF_device:chr_file { read write ioctl open };
@@ -257,7 +265,7 @@ allow mediaserver sysfs_lowmemorykiller:file { read open };
 # Purpose : HDCP
 allow mediaserver mobicore:unix_stream_socket connectto;
 allow mediaserver mobicore_data_file:dir search;
-allow mediaserver mobicore_data_file:file { read open lock};
+allow mediaserver mobicore_data_file:file { getattr read open lock};
 allow mediaserver mobicore_user_device:chr_file { read write open ioctl};
 allow mediaserver persist_data_file:dir { create write add_name search};
 allow mediaserver persist_data_file:file { read write create open getattr };
@@ -339,7 +347,21 @@ allow mediaserver proc_thermal:file { write getattr open };
 allow mediaserver thermal_manager_exec:file { getattr execute read open execute_no_trans };
 allow mediaserver proc_mtkcooler:file { read write open };
 allow mediaserver proc_mtktz:file { read write open };
-allow mediaserver proc_thermal:file read;
+allow mediaserver proc_thermal:file { read write open };
 allow mediaserver system_data_file:file setattr;
 
+# Date : WK14.52
+# Operation : WVL1 IT
+# Purpose : SVP module operates secmem driver
+allow mediaserver mobicore_data_file:file getattr;
+allow mediaserver proc_secmem:file ioctl;
 
+# Date : WK15.03
+# Operation : Migration
+# Purpose : offloadservice
+allow mediaserver offloadservice_device:chr_file { read write ioctl open };
+
+# Date : WK15.11
+# Operation : SRS
+# Purpose : SRS
+allow mediaserver system_data_file:file { getattr open read ioctl lock append write };

@@ -58,7 +58,7 @@ allow ipod property_socket:sock_file write;
 
 allow ipod init:dir getattr;
 allow ipod init:unix_stream_socket connectto;
-allow ipod sysfs_wake_lock:file { read write open };
+allow ipod sysfs_wake_lock:file { read write open getattr };
 allow ipod block_device:dir search;
 allow ipod gpu_device:chr_file { read write open ioctl };
 allow ipod ipod:netlink_kobject_uevent_socket { create bind read setopt };
@@ -66,7 +66,7 @@ allow ipod input_device:dir { open read search };
 allow ipod input_device:file { open read write ioctl };
 allow ipod input_device:chr_file { open read write ioctl };
 allow ipod rtc_device:chr_file { open read write ioctl };
-allow ipod sysfs:file { open read write };
+allow ipod sysfs:file { open read write getattr };
 allow ipod alarm_device:chr_file write;
 allow ipod system_server:unix_stream_socket connectto;
 allow ipod proc:file { open read write };
@@ -76,6 +76,8 @@ allow ipod logo_device:chr_file { open read };
 # reboot syscall to switch to recovery/factory mode instantly
 allow ipod self:capability sys_boot;
 allow ipod proc_sysrq:file { open write };
+
+allow ipod debugfs:file { open read getattr };
 
 # IPOH
 allow ipod system_data_file:dir { open read write add_name create remove_name };

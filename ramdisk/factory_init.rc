@@ -60,6 +60,10 @@ loglevel 5
     mkdir /cache 0770 system cache
     mkdir /config 0500 root root
 
+    # See storage config details at http://source.android.com/tech/storage/
+    mkdir /mnt/shell 0700 shell shell
+    mkdir /mnt/media_rw 0700 media_rw media_rw
+    mkdir /storage 0751 root sdcard_r
 
     # Filesystem image public mount points.
     mkdir /mnt/obb 0700 root system
@@ -162,6 +166,8 @@ on post-fs
     # make the selinux kernel policy world-readable
     chmod 0444 /sys/fs/selinux/policy
 #SeLinux
+    mkdir /data/ccci_cfg 0770 system radio
+    restorecon /data/ccci_cfg
     restorecon_recursive /protect_f
     restorecon_recursive /protect_s
    
@@ -276,6 +282,8 @@ on post-fs-data
     #NFC
     rm /data/mtknfc_server
 
+    # for irda
+    chmod 0660 /dev/remote_ctrl_dev
 ## Custom pos_fs area (END) 
 
     # Separate location for storing security policy files on data
