@@ -199,8 +199,6 @@ public class AdvanceColorTuningFragment extends BaseTuningFragment {
         }
 
         // Set this flag for sharpness decoding.
-        options.inPostProc = true;
-        options.inJustDecodeBounds = false;
         mBitmap = BitmapFactory.decodeResource(getResources(), resId, options);
         Log.d(TAG, "Completed decoding image for sharpness!");
     }

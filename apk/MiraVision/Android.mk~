@@ -1,10 +1,8 @@
-ifeq ($(strip $(MTK_MIRAVISION_SETTING_SUPPORT)),yes)
-
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_JAVA_LIBRARIES := bouncycastle 
-LOCAL_JAVA_LIBRARIES += mediatek-framework
+LOCAL_JAVA_LIBRARIES += framework
 
 LOCAL_STATIC_JAVA_LIBRARIES := android-support-v4
 

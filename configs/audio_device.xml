@@ -52,14 +52,24 @@
     </path>    
     <!--mic setting-->  
     <path name="builtin_Mic_Mic1" value="turnon">
-        <kctl name="Audio_ADC_1_Switch" value="On" />
+        <kctl name="Audio_ADC_1_Switch" value="On" />    
         <kctl name="Audio_Preamp1_Switch" value="IN_ADC1" />
         <kctl name="Audio_MicSource1_Setting" value="ADC1" />
-        <kctl name="Audio_MicSource2_Setting" value="ADC1" />        
+        <kctl name="Audio_MicSource2_Setting" value="ADC1" />   
     </path>
-    <path name="builtin_Mic_Mic1" value="turnoff">   
-        <kctl name="Audio_Preamp1_Switch" value="OPEN" />    
-        <kctl name="Audio_ADC_1_Switch" value="Off" />
+    <path name="builtin_Mic_Mic1" value="turnoff">
+        <kctl name="Audio_Preamp1_Switch" value="OPEN" />
+        <kctl name="Audio_ADC_1_Switch" value="Off" />     
+    </path>
+    <path name="builtin_Mic_Mic2" value="turnon">
+        <kctl name="Audio_ADC_2_Switch" value="On" />
+        <kctl name="Audio_Preamp1_Switch" value="IN_ADC1" />
+        <kctl name="Audio_MicSource1_Setting" value="ADC2" />
+        <kctl name="Audio_MicSource2_Setting" value="ADC2" />   
+    </path>
+    <path name="builtin_Mic_Mic2" value="turnoff">
+        <kctl name="Audio_Preamp1_Switch" value="OPEN" />
+        <kctl name="Audio_ADC_2_Switch" value="Off" />
     </path>
     <path name="builtin_Mic_Mic3" value="turnon">
         <kctl name="Audio_ADC_3_Switch" value="On" />
@@ -104,7 +114,7 @@
         <kctl name="Audio_ADC_1_Switch" value="Off" />     
         <kctl name="Audio_ADC_2_Switch" value="Off" />
         <kctl name="Audio_Preamp1_Switch" value="OPEN" />
-    </path>    
+    </path>
     <path name="headset_mic_input" value="turnon">
         <kctl name="Audio_MIC1_Mode_Select" value="ACCMODE" />
         <kctl name="Audio_MIC2_Mode_Select" value="ACCMODE" />    

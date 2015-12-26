@@ -11,7 +11,8 @@ import /init.${ro.zygote}.rc
 import /init.trace.rc
 # Include CM's extra init file
 import /init.cm.rc
-
+import /init.hermes.power.rc
+import /init.storage.rc
 
 on early-init
 
@@ -126,7 +127,7 @@ loglevel 6 ####
     chown system system /dev/cpuctl/tasks
     chmod 0666 /dev/cpuctl/tasks
     write /dev/cpuctl/cpu.shares 1024
-    write /dev/cpuctl/cpu.rt_runtime_us 800000
+    write /dev/cpuctl/cpu.rt_runtime_us 950000
     write /dev/cpuctl/cpu.rt_period_us 1000000
 
     mkdir /dev/cpuctl/bg_non_interactive
@@ -597,6 +598,7 @@ service servicemanager /system/bin/servicemanager
     onrestart restart media
     onrestart restart surfaceflinger
     onrestart restart drm
+    onrestart restart shelld
 
 service vold /system/bin/vold
     class core

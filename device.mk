@@ -103,7 +103,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ramdisk/meta_init.project.rc:root/meta_init.project.rc \
     $(LOCAL_PATH)/ramdisk/meta_init.rc:root/meta_init.rc \
     $(LOCAL_PATH)/ramdisk/init:root/init \
-   
+    $(LOCAL_PATH)/ramdisk/init.hermes.power.rc:root/init.hermes.power.rc \
+    $(LOCAL_PATH)/ramdisk/init.storage.rc:root/init.storage.rc \
 
 # Telecom
 PRODUCT_COPY_FILES += \
@@ -202,17 +203,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/configs/agps_profiles_conf2.xml:system/etc/agps_profiles_conf2.xml \
 
-# FM
+# APK
 PRODUCT_PACKAGES += \
     autofmd \
     autofm \
     FMRadio \
-    FMTransmitter
-
-# APK
-PRODUCT_PACKAGES += \
-    MiraVision \
-    libMiraVision_jni
+    MiraVision
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
      ro.adb.secure=0 \
