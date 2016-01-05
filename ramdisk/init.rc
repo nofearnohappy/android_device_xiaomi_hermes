@@ -13,6 +13,7 @@ import /init.trace.rc
 import /init.cm.rc
 import /init.hermes.power.rc
 import /init.storage.rc
+import /init.modem.rc
 
 on early-init
 

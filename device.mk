@@ -1,18 +1,3 @@
-# 
-# Copyright 2015 The Android Open Source Project
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # The gps config appropriate for this device
@@ -81,8 +66,8 @@ PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/configs/AVRCP.kl:system/usr/keylayout/AVRCP.kl      
 
 #Light    
-PRODUCT_PACKAGES += \
-      lights.mt6795 
+#PRODUCT_PACKAGES += \
+      #lights.mt6795 
 
 # Ramdisk
 PRODUCT_COPY_FILES += \
@@ -105,6 +90,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ramdisk/init:root/init \
     $(LOCAL_PATH)/ramdisk/init.hermes.power.rc:root/init.hermes.power.rc \
     $(LOCAL_PATH)/ramdisk/init.storage.rc:root/init.storage.rc \
+    $(LOCAL_PATH)/ramdisk/unlock_key:root/unlock_key \
 
 # Telecom
 PRODUCT_COPY_FILES += \
@@ -197,18 +183,8 @@ PRODUCT_PACKAGES += \
     Stk
 
 # GPS
-PRODUCT_PACKAGES += \
-    YGPS
-
 PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/configs/agps_profiles_conf2.xml:system/etc/agps_profiles_conf2.xml \
-
-# APK
-PRODUCT_PACKAGES += \
-    autofmd \
-    autofm \
-    FMRadio \
-    MiraVision
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
      ro.adb.secure=0 \

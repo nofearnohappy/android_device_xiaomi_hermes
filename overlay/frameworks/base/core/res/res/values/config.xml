@@ -94,34 +94,35 @@
 
     <bool name="config_wifi_background_scan_support">true</bool>
 
-    <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
-    <bool name="config_intrusiveNotificationLed">true</bool>
+    <integer name="config_doubleTapOnHomeBehavior">0</integer>
 
-    <!-- Does the notification LED support multiple colors?
-         Used to decide if the user can change the colors -->
-    <bool name="config_multiColorNotificationLed">true</bool>
-
-    <!-- Default color for notification LED is white. -->
-    <color name="config_defaultNotificationColor">#ffffffff</color>
+    <!-- Default color for notification LED. -->
+    <color name="config_defaultNotificationColor">#ff00ff00</color>
 
     <!-- Default LED on time for notification LED in milliseconds. -->
-    <integer name="config_defaultNotificationLedOn">1000</integer>
+    <integer name="config_defaultNotificationLedOn">500</integer>
+
+    <!-- Default LED off time for notification LED in milliseconds. -->
+    <integer name="config_defaultNotificationLedOff">4500</integer>
+
+    <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
+    <bool name="config_intrusiveNotificationLed">true</bool>
 
     <!-- Is the battery LED intrusive? Used to decide if there should be a disable option -->
     <bool name="config_intrusiveBatteryLed">true</bool>
 
-    <!-- Does the battery LED support multiple colors? Used to decide if the user can change the colors -->
+    <!-- Does the notification LED support multiple colors?
+                  Used to decide if the user can change the colors -->
+    <bool name="config_multiColorNotificationLed">true</bool>
+
+    <!-- Does the battery LED support multiple colors?
+                  Used to decide if the user can change the colors -->
     <bool name="config_multiColorBatteryLed">true</bool>
-    
-    <!-- Default value for led color when battery is low on charge -->
-    <integer name="config_notificationsBatteryLowARGB">0xffff0000</integer>
 
-    <!-- Default value for led color when battery is medium charged -->
-    <integer name="config_notificationsBatteryMediumARGB">0xffffff00</integer>
-
-    <!-- Default value for led color when battery is fully charged -->
-    <integer name="config_notificationsBatteryFullARGB">0xff00ff00</integer>
-   
+    <!-- Do the battery/notification LEDs support pulsing?
+         Used to decide if we show pulse settings -->
+    <bool name="config_ledCanPulse">false</bool>
+ 
     <bool name="config_automatic_brightness_available">true</bool>
 
     <integer-array name="config_autoBrightnessLevels">

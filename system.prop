@@ -1,4 +1,5 @@
 #
+#
 # system.prop for Hermes
 #
 
@@ -160,6 +161,7 @@ ro.mtk_cta_set=1
 ro.mtk_antibricking_level=2
 ro.mtk_zsdhdr_support=1
 ro.mtk_cam_mfb_support=0
+ro.mtk_slow_motion_support=1
 ro.mtk_lte_support=1
 ro.mtk_umts_tdd128_mode=1
 ro.mtk_cam_mav_support=1
@@ -175,12 +177,6 @@ ro.have_aee_feature=1
 ro.sim_me_lock_mode=0
 ro.mtk_voice_extension_support=1
 wfd.dummy.enable=1
-persist.sys.display.clearMotion=1
-persist.clearMotion.fblevel.nrm=255
-persist.clearMotion.fblevel.bdr=255
-ro.mtk_clearmotion_support=1
-ro.mtk_slow_motion_support=1
-ro.mtk_16x_slowmotion_support=1
 persist.sys.mitalk.enable=true
 persist.power.useautobrightadj=true
 keyguard.no_require_sim=true

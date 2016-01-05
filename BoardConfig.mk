@@ -1,18 +1,3 @@
-#
-# Copyright 2015 The Android Open Source Project
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 # mt6795 platform boardconfig
 LOCAL_PATH := device/xiaomi/hermes
 -include vendor/xiaomi/hermes/BoardConfigVendor.mk
@@ -62,14 +47,7 @@ COMMON_GLOBAL_CPPFLAGS += -DMTK_HARDWARE
 BOARD_CONNECTIVITY_VENDOR := MediaTek
 BOARD_USES_MTK_AUDIO := true
 
-#Use dlmalloc instead of jemalloc for mallocs
-#MALLOC_IMPL := dlmalloc
-
 # kernel
-#TARGET_KERNEL_ARCH := arm64
-#TARGET_KERNEL_HEADER_ARCH := arm64
-#TARGET_KERNEL_SOURCE := kernel/xiaomi/hermes
-#TARGET_KERNEL_CONFIG := hermes_defconfig
 TARGET_USES_64_BIT_BINDER := true
 TARGET_IS_64_BIT := true
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 androidboot.selinux=permissive
@@ -78,7 +56,6 @@ BOARD_KERNEL_PAGESIZE := 2048
 BOARD_MKBOOTIMG_ARGS := --base 0x40078000 --pagesize 2048 --kernel_offset 0x00008000 --ramdisk_offset 0x03f88000 --second_offset 0x00e88000 --tags_offset 0x0df88000 --board Bule
 TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel
 BOARD_CUSTOM_BOOTIMG := true
-#BOARD_CUSTOM_BOOTIMG_MK := $(LOCAL_PATH)/bootimg.mk
 # MKImage
 TARGET_MKIMAGE := $(LOCAL_PATH)/mkimage
 TARGET_USE_BUILT_BOOTIMAGE := true
@@ -93,10 +70,6 @@ BOARD_EGL_CFG := $(LOCAL_PATH)/configs/egl.cfg
 TARGET_SCREEN_HEIGHT := 1920
 TARGET_SCREEN_WIDTH := 1080
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
-
-# Deodex
-#WITH_DEXPREOPT := false
-#DISABLE_DEXPREOPT := true
 
 # Flags
 TARGET_GLOBAL_CFLAGS   += -mfpu=neon -mfloat-abi=softfp

@@ -9,7 +9,7 @@ on post-fs-data
     write /proc/bootprof "post-fs-data: on modem start"
 
     # Modem related device nodes
-    mkdir /data/nvram/md  0770 root nvram
+    mkdir /data/nvram/md  0770 root system
 
     chown radio radio /sys/kernel/ccci/boot
 
@@ -53,6 +53,7 @@ service ril-daemon-mtk /system/bin/mtkrild
     socket rild-mtk-ut-2 stream 660 radio net_bt
     socket rild-mtk-modem stream 660 radio system
     socket rild-atci stream 660 root radio
+    socket rild-vsim stream 660 root radio
     user root
     group radio cache inet misc audio sdcard_r sdcard_rw log system
     disabled
@@ -67,6 +68,7 @@ service ril-daemon-mtkmd2 /system/bin/mtkrildmd2
     socket rild-mtk-ut-2-md2 stream 660 radio net_bt
     socket rild-mtk-modem-md2 stream 660 radio system
     socket rild-atci-md2 stream 660 root radio
+    socket rild-vsim-md2 stream 660 root radio
     user root
     group radio cache inet misc audio sdcard_r sdcard_rw log system
     disabled
