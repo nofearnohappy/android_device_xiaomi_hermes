@@ -1,0 +1,78 @@
+From e482b3204cf1bfb1a5c2eb9a28b2c4e60bae0fbb Mon Sep 17 00:00:00 2001
+From: ksrt12 <kazakov12stepan2012@live.ru>
+Date: Tue, 13 Oct 2015 20:42:28 +0600
+Subject: [PATCH] Add prebuilt chromium
+
+Change-Id: I8dce3d75eaee6ab514ea97a0516e6206834ea042
+---
+ core/Makefile |  8 ++++++++
+ envsetup.sh   | 27 +++++++++++++++++++++++++++
+ 2 files changed, 35 insertions(+)
+
+diff --git a/core/Makefile b/core/Makefile
+index 9ab196a..9ad1367 100644
+--- a/core/Makefile
++++ b/core/Makefile
+@@ -1739,6 +1739,14 @@ CM_TARGET_PACKAGE := $(PRODUCT_OUT)/cm-$(CM_VERSION).zip
+ 
+ .PHONY: otapackage bacon
+ otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
++
++ifeq ($(USE_PREBUILT_CHROMIUM),1)
++ifneq ($(PRODUCT_PREBUILT_WEBVIEWCHROMIUM),yes)
++	@echo "Running Chromium prebuilt setup script..."
++	$(hide) . $(TOPDIR)vendor/cm/tools/chromium_prebuilt.sh $(TOP)
++endif
++endif
++
+ bacon: otapackage
+ 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(CM_TARGET_PACKAGE)
+ 	$(hide) $(MD5SUM) $(CM_TARGET_PACKAGE) > $(CM_TARGET_PACKAGE).md5sum
+diff --git a/envsetup.sh b/envsetup.sh
+index 3a6967a..edb713e 100644
+--- a/envsetup.sh
++++ b/envsetup.sh
+@@ -649,6 +649,13 @@ function lunch()
+ 
+     echo
+ 
++    if [[ $USE_PREBUILT_CHROMIUM -eq 1 ]]; then
++        chromium_prebuilt
++    else
++        # Unset flag in case user opts out later on
++        export PRODUCT_PREBUILT_WEBVIEWCHROMIUM=""
++    fi
++
+     fixup_common_out_dir
+ 
+     set_stuff_for_environment
+@@ -2593,6 +2600,26 @@ function pez {
+     return $retval
+ }
+ 
++function chromium_prebuilt() {
++    T=$(gettop)
++    export TARGET_DEVICE=$(get_build_var TARGET_DEVICE)
++    hash=$T/prebuilts/chromium/$TARGET_DEVICE/hash.txt
++    libsCheck=$T/prebuilts/chromium/$TARGET_DEVICE/lib/libwebviewchromium.so
++    appCheck=$T/prebuilts/chromium/$TARGET_DEVICE/app/webview
++    device_target=$T/prebuilts/chromium/$TARGET_DEVICE/
++
++    if [ -r $hash ] && [ $(git --git-dir=$T/external/chromium_org/.git --work-tree=$T/external/chromium_org rev-parse --verify HEAD) == $(cat $hash) ] && [ -f $libsCheck ] && [ -d $appCheck ]; then
++        export PRODUCT_PREBUILT_WEBVIEWCHROMIUM=yes
++        echo "** Prebuilt Chromium is up-to-date; Will be used for build **"
++    else
++        export PRODUCT_PREBUILT_WEBVIEWCHROMIUM=no
++        rm -rfv $device_target
++        echo ""
++        echo "** Prebuilt Chromium out-of-date/not found; Will build from source **"
++        echo ""
++    fi
++}
++
+ function get_make_command()
+ {
+   echo command make
+-- 
+2.1.4
+

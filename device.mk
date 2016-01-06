@@ -32,6 +32,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     hermes
 
+# gralloc
+PRODUCT_PACKAGES += \
+   libgralloc_extra
+
 # hack to fix asec on emulated sdcard
 PRODUCT_PACKAGES += \
     asec_helper
