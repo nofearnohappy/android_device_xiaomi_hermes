@@ -1,4 +1,4 @@
-#define LOG_TAG "proj_dev_setup"
+#define LOG_TAG "hermes"
 
 #include <fcntl.h>
 #include <string.h>
