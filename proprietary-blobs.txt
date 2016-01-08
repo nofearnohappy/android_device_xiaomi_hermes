@@ -172,7 +172,7 @@ lib/hw/audio.primary.mt6795.so
 lib/hw/camera.mt6795.so
 lib/hw/gps.default.so
 lib/hw/lights.default.so
-lib/hw/gralloc.default.so
+#lib/hw/gralloc.default.so
 lib/hw/hwcomposer.mt6795.so
 lib/hw/memtrack.mt6795.so
 lib/hw/mmsdk.default.so
@@ -411,7 +411,7 @@ lib64/hw/audio.primary.mt6795.so
 lib64/hw/camera.mt6795.so
 lib64/hw/gps.default.so
 lib64/hw/lights.default.so
-lib64/hw/gralloc.default.so
+#lib64/hw/gralloc.default.so
 lib64/hw/hwcomposer.mt6795.so
 lib64/hw/memtrack.mt6795.so
 lib64/hw/mmsdk.default.so

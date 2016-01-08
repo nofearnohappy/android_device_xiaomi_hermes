@@ -94,7 +94,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ramdisk/init:root/init \
     $(LOCAL_PATH)/ramdisk/init.hermes.power.rc:root/init.hermes.power.rc \
     $(LOCAL_PATH)/ramdisk/init.storage.rc:root/init.storage.rc \
-    $(LOCAL_PATH)/ramdisk/unlock_key:root/unlock_key \
 
 # Telecom
 PRODUCT_COPY_FILES += \
